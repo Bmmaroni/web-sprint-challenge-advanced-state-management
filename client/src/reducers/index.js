@@ -16,11 +16,11 @@ const reducer = (state = initialState, action) => {
       const newSmurf = {name: action.payload, position: action.payload, nickname: action.payload, description: action.payload}
       return {...state, smurfs: [...state.smurfs, newSmurf]};
     case "FETCHING_SMURFS_START":
-      return {...state};
+      return {...state, loading: true};
       case "FETCHING_SMURFS_SUCCESS":
-      return {...state};
+      return {...state, smurfs: action.payload, loading: false};
       case "FETCHING_SMURFS_FAILURE":
-      return {...state};
+      return {...state, error: action.payload, loading: false};
     default:
       return state
   }
