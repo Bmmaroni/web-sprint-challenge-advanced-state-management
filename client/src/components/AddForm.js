@@ -1,14 +1,57 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addSmurf } from '../actions';
 
 class AddForm extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            smurf: {
+            name: '',
+            position: '',
+            nickname: '',
+            description: ''
+            }
+        }
+    }
+
+    handleChange = (e) => {
+        e.persist();
+        this.setState({
+            ...this.state,
+            smurf:{...this.state.smurf, [e.target.name]: e.target.value}
+        })
+    };
+
+    formSubmit = (e) => {
+        e.preventDefault();
+        this.props.addSmurf(this.state.smurf);
+        this.setState({
+            smurf: {
+                name: '',
+                position: '',
+                nickname: '',
+                description: ''
+            }})
+    }
 
     render() {
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.formSubmit} >
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
+                    <input onChange={this.handleChange} name="name" id="name" value={this.state.smurf.name} />
+                    
+                    <label htmlFor="position">Position:</label><br/>
+                    <input onChange={this.handleChange} name="position" id="position" value={this.state.smurf.position}/>
+                    
+                    <label htmlFor="nickname">nickname:</label><br/>
+                    <input onChange={this.handleChange} name="nickname" id="nickname" value={this.state.smurf.nickname}/>
+                    
+                    <label htmlFor="description">description:</label><br/>
+                    <input onChange={this.handleChange} name="description" id="description" value={this.state.smurf.description}/>
                 </div>
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
@@ -18,7 +61,11 @@ class AddForm extends React.Component {
     }
 }
 
-export default AddForm;
+const mapStateToProps = (state) => {
+    return {state}
+};
+
+export default connect(mapStateToProps, { addSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

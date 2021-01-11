@@ -1,10 +1,19 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 class Smurf extends React.Component {
     render() {
         const { smurf } = this.props;
 
         return(<div data-testid="smurf" className="card">
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Header>{smurf.name}</Card.Header>
+                    <Card.Subtitle>{smurf.nickname}</Card.Subtitle>
+                    <Card.Text>{smurf.position}</Card.Text>
+                    <Card.Text>{smurf.description}</Card.Text>
+                </Card.Body>
+            </Card>
         </div>);
     }
 }
