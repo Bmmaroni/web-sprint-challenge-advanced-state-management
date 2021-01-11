@@ -62,12 +62,7 @@ class AddForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        name: state.smurfs.name,
-        position: state.smurfs.position,
-        nickname: state.smurfs.nickname,
-        description: state.smurfs.description
-    }
+    return {state}
 };
 
 export default connect(mapStateToProps, { addSmurf })(AddForm);

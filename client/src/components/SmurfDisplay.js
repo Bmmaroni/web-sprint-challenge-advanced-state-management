@@ -4,23 +4,35 @@ import { getSmurfs } from '../actions';
 import Smurf from './Smurf';
 
 export class SmurfDisplay extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    componentDidMount() {
+        this.props.getSmurfs();
+    };
+    
     render() {
-        return(<div>
-            {this.props.smurfs.map((smurf, index) => {
-                return(
-                    <Smurf 
-                        key={index} 
-                        smurf={smurf}
-                    />
-                )
-            })}
-        </div>)
+        if(this.props.loading) {
+            return <p>running around the village...</p>;
+        }
+            return(
+                <div>
+                    {this.props.smurfs.map((smurf, index) => {
+                        return(
+                            <Smurf 
+                                key={index} 
+                                smurf={smurf}
+                            />
+                        )
+                    })}
+                </div>)
     }
 }
 
 const mapStateToProps = state => {
     return {
-        smurfs: state.smurfs
+        smurfs: state.smurfs,
+        loading: state.loading
     }
 }
 

@@ -1,13 +1,8 @@
 
 export const initialState = {
-  smurfs: [{
-    name: '',
-    position: '',
-    nickname: '',
-    description: '',
-    loading: false,
-    error: ''
-  }]
+  smurfs: [],
+  loading: false,
+  error: ''
 };
 
 export const reducer = (state = initialState, action) => {
