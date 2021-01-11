@@ -10,23 +10,20 @@ export const initialState = {
   }]
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "ADD_SMURF":
-      const newSmurf = {name: action.payload, position: action.payload, nickname: action.payload, description: action.payload}
-      return {...state, smurfs: [...state.smurfs, newSmurf]};
+      return {...state, smurfs: action.payload};
     case "FETCHING_SMURFS_START":
       return {...state, loading: true};
-      case "FETCHING_SMURFS_SUCCESS":
+    case "FETCHING_SMURFS_SUCCESS":
       return {...state, smurfs: action.payload, loading: false};
-      case "FETCHING_SMURFS_FAILURE":
+    case "FETCHING_SMURFS_FAILURE":
       return {...state, error: action.payload, loading: false};
     default:
       return state
   }
 }
-
-export default reducer;
 
 //Task List:
 //1. Add in the initialState needed to hold: 
